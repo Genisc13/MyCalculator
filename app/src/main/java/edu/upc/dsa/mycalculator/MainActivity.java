@@ -55,6 +55,80 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn.setOnClickListener(this);
     }
 
+    String calculate_trig(String operation,String calculation){
+        String trig="";
+        String a="";
+        String b="";
+        String c="";
+        if(calculation.length()<=1)
+            a=calculation.substring(0,calculation.length()-1);
+        else if (calculation.length()<=2){
+            a=calculation.substring(0,calculation.length()-1);
+            b=calculation.substring(0,calculation.length()- 2);
+        }
+        else{
+            a=calculation.substring(0,calculation.length()-1);
+            b=calculation.substring(0,calculation.length()- 2);
+            c=calculation.substring(0,calculation.length()-3);
+        }
+        if(a.endsWith("+") || a.endsWith("-") || a.endsWith("*")|| a.endsWith("/")|| a.endsWith("(")|| a.endsWith(")") || a.equals("")){
+            trig= calculation.substring(calculation.length()-1);
+            calculation=a;
+            Double Cal=Double.valueOf(trig);
+            if(operation.equals("sin")){
+                trig= String.valueOf(Math.sin(Math.toRadians(Cal)));
+            }
+            if(operation.equals("cos")){
+                trig= String.valueOf(Math.cos(Math.toRadians(Cal)));
+            }
+            if(operation.equals("tan")){
+                trig= String.valueOf(Math.tan(Math.toRadians(Cal)));
+            }
+            if (trig.length()>5){
+                trig=trig.substring(0,0+4);
+            }
+            calculation=calculation+trig;
+        }
+        else if(b.endsWith("+") || b.endsWith("-") || b.endsWith("*")|| b.endsWith("/")|| b.endsWith("(")|| b.endsWith(")")|| b.equals("")){
+            trig= calculation.substring(calculation.length()-2);
+            calculation=b;
+            Double Cal=Double.valueOf(trig);
+            if(operation.equals("sin")){
+                trig= String.valueOf(Math.sin(Math.toRadians(Cal)));
+            }
+            if(operation.equals("cos")){
+                trig= String.valueOf(Math.cos(Math.toRadians(Cal)));
+            }
+            if(operation.equals("tan")){
+                trig= String.valueOf(Math.tan(Math.toRadians(Cal)));
+            }
+            if (trig.length()>5){
+                trig=trig.substring(0,0+4);
+            }
+            calculation=calculation+trig;
+        }
+        else if(c.endsWith("+") || c.endsWith("-") || c.endsWith("*")|| c.endsWith("/")|| c.endsWith("(")|| c.endsWith(")")|| c.equals("")){
+            trig= calculation.substring(calculation.length()-3);
+            calculation=c;
+            Double Cal=Double.valueOf(trig);
+            if(operation.equals("sin")){
+                trig= String.valueOf(Math.sin(Math.toRadians(Cal)));
+            }
+            if(operation.equals("cos")){
+                trig= String.valueOf(Math.cos(Math.toRadians(Cal)));
+            }
+            if(operation.equals("tan")){
+                trig= String.valueOf(Math.tan(Math.toRadians(Cal)));
+            }
+            if (trig.length()>5){
+                trig=trig.substring(0,0+4);
+            }
+            calculation=calculation+trig;
+        }
+
+        return calculation;
+    }
+
     @Override
     public void onClick(View view) {
         Button button=(MaterialButton) view;
@@ -72,6 +146,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else if(buttonText.equals("C")){
             calculation= calculation.substring(0,calculation.length()-1);
         }
+        else if(buttonText.equals("sin")){
+                calculation=this.calculate_trig("sin",calculation);
+            }
+        else if(buttonText.equals("cos")){
+            calculation=this.calculate_trig("cos",calculation);
+        }
+        else if(buttonText.equals("tan")){
+            calculation=this.calculate_trig("tan",calculation);
+        }
+
         else {
             calculation=calculation+buttonText;
         }
